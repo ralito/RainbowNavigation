@@ -38,7 +38,7 @@ extension UINavigationBar {
         
         for subview in subviews {
             if subview != backgroundView {
-                self.bringSubview(toFront: subview)
+                self.bringSubviewToFront(subview)
             }
         }
     }
