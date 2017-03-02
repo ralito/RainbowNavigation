@@ -6,7 +6,7 @@
 
 ## Feature
 
-`RainbowNavigation` is written in Swift 2.0. It helps you change the backgroundColor of `UINavigationBar` in animations and transitions.
+`RainbowNavigation` is written in Swift 2.0. It helps you change the backgroundColor of `UINavigationBar` in animations and transitions. 
 
 ![image1](https://github.com/DanisFabric/RainbowNavigation/blob/master/images/demo1.gif)
 ![image2](https://github.com/DanisFabric/RainbowNavigation/blob/master/images/demo2.gif)
@@ -15,10 +15,17 @@
 ## Requirements
 
 * iOS 8.0 +
-* Swift 3.0 +
+* Swift 2.0 +
 
 ## Install
 
+### CocoaPods
+
+Add following code to your `Podfile`, and run `pod install`: 
+
+```ruby
+pod 'RainbowNavigation'
+```
 ### Carthage
 
 Add following code to your `Cartfile`, and run `carthage update`:
@@ -41,7 +48,7 @@ Restore the default values
 ```
 navigationBar.df_reset()
 ```
-You can add a mask for statusBar:
+You can add a mask for statusBar: 
 
 ```Swift
 navigationBar.df_setStatusBarMaskColor(UIColor.blackColor().colorWithAlphaComponent(0.1))
@@ -61,7 +68,7 @@ lazy var rainbowNavigation = RainbowNavigation()
     }
 ```
 
-2. Your viewController need to confirm `RainbowColorSource` protocol, and offer the color which navigationBar will change into.
+2. Your viewController need to confirm `RainbowColorSource` protocol, and offer the color which navigationBar will change into. 
 
 ```Swift
 @objc public protocol RainbowColorSource {
@@ -73,7 +80,7 @@ lazy var rainbowNavigation = RainbowNavigation()
 
 ## Demo
 
-`RainbowNavigation` is simple to use, downlaod the demo project and learn more.
+`RainbowNavigation` is simple to use, downlaod the demo project and learn more. 
 
 ## Author
 

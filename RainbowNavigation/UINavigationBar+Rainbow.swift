@@ -13,26 +13,26 @@ private var kStatusBarMaskKey  = "kStatusBarMaskKey"
 
 extension UINavigationBar {
     
-    public func df_setStatusBarMaskColor(_ color: UIColor) {
+    public func df_setStatusBarMaskColor(color: UIColor) {
         if statusBarMask == nil {
-            statusBarMask = UIView(frame: CGRect(x: 0, y: -20, width: UIScreen.main.bounds.width, height: 20))
-            statusBarMask?.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+            statusBarMask = UIView(frame: CGRect(x: 0, y: -20, width: UIScreen.mainScreen().bounds.width, height: 20))
+            statusBarMask?.autoresizingMask = [.FlexibleWidth,.FlexibleHeight]
             if let tempBackgroundView = backgroundView {
                 insertSubview(statusBarMask!, aboveSubview: tempBackgroundView)
             }else {
-                insertSubview(statusBarMask!, at: 0)
+                insertSubview(statusBarMask!, atIndex: 0)
             }
         }
         statusBarMask?.backgroundColor = color
     }
-    public func df_setBackgroundColor(_ color: UIColor) {
+    public func df_setBackgroundColor(color: UIColor) {
         if backgroundView == nil {
-            setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+            setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
             shadowImage = UIImage()
-            backgroundView = UIView(frame: CGRect(x: 0, y: -20, width: UIScreen.main.bounds.width, height: 64))
-            backgroundView?.isUserInteractionEnabled = false
-            backgroundView?.autoresizingMask = [.flexibleHeight,.flexibleWidth]
-            insertSubview(backgroundView!, at: 0)
+            backgroundView = UIView(frame: CGRect(x: 0, y: -20, width: UIScreen.mainScreen().bounds.width, height: 64))
+            backgroundView?.userInteractionEnabled = false
+            backgroundView?.autoresizingMask = [.FlexibleHeight,.FlexibleWidth]
+            insertSubview(backgroundView!, atIndex: 0)
         }
         backgroundView?.backgroundColor = color
         
@@ -44,7 +44,7 @@ extension UINavigationBar {
     }
 
     public func df_reset() {
-        setBackgroundImage(nil, for: .default)
+        setBackgroundImage(nil, forBarMetrics: .Default)
         shadowImage = nil
         
         backgroundView?.removeFromSuperview()
@@ -52,7 +52,7 @@ extension UINavigationBar {
     }
     
     // MARK: Properties
-    fileprivate var backgroundView:UIView? {
+    private var backgroundView:UIView? {
         get {
             return objc_getAssociatedObject(self, &kBackgroundViewKey) as? UIView
         }
@@ -61,7 +61,7 @@ extension UINavigationBar {
             
         }
     }
-    fileprivate var statusBarMask:UIView? {
+    private var statusBarMask:UIView? {
         get {
             return objc_getAssociatedObject(self, &kStatusBarMaskKey) as? UIView
         }

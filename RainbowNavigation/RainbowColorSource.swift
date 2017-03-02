@@ -7,6 +7,6 @@
 //
 
 @objc public protocol RainbowColorSource {
-    @objc optional func navigationBarInColor() -> UIColor
-    @objc optional func navigationBarOutColor() -> UIColor
+    optional func navigationBarInColor() -> UIColor
+    optional func navigationBarOutColor() -> UIColor
 }

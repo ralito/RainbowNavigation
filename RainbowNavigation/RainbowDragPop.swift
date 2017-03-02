@@ -11,8 +11,8 @@ class RainbowDragPop: UIPercentDrivenInteractiveTransition {
     var interacting = false
     weak var navigationController:UINavigationController! {
         didSet {
-            let panGesture   = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(RainbowDragPop.handlePan(_:)))
-            panGesture.edges = UIRectEdge.left
+            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(RainbowDragPop.handlePan(_:)))
+            
             navigationController?.view.addGestureRecognizer(panGesture)
         }
     }
@@ -27,37 +27,37 @@ class RainbowDragPop: UIPercentDrivenInteractiveTransition {
     }
     
     
-    func handlePan(_ panGesture:UIScreenEdgePanGestureRecognizer) {
-        let offset = panGesture.translation(in: panGesture.view)
-        let velocity = panGesture.velocity(in: panGesture.view)
+    func handlePan(panGesture:UIPanGestureRecognizer) {
+        let offset = panGesture.translationInView(panGesture.view)
+        let velocity = panGesture.velocityInView(panGesture.view)
         
         switch panGesture.state {
-        case .began:
+        case .Began:
             if !self.popAnimator.animating {
                 interacting = true
                 if velocity.x > 0 && self.navigationController.viewControllers.count > 0 {
-                    navigationController.popViewController(animated: true)
+                    navigationController.popViewControllerAnimated(true)
                 }
             }
-        case .changed:
+        case .Changed:
             if interacting {
                 var progress = offset.x / panGesture.view!.bounds.width
                 progress = max(progress,0)
                 
-                self.update(progress)
+                self.updateInteractiveTransition(progress)
             }
-        case .ended:
+        case .Ended:
             if interacting {
-                if panGesture.velocity(in: panGesture.view!).x > 0 {
-                    self.finish()
+                if panGesture.velocityInView(panGesture.view!).x > 0 {
+                    self.finishInteractiveTransition()
                 }else {
-                    self.cancel()
+                    self.cancelInteractiveTransition()
                 }
                 interacting = false
             }
-        case .cancelled:
+        case .Cancelled:
             if interacting {
-                self.cancel()
+                self.cancelInteractiveTransition()
                 interacting = false
             }
         default:
